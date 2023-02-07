@@ -1,0 +1,16 @@
+{
+    "name": "minibank/api",
+    "description": "Estudo para API REST com PHP e Vue",
+    "type":"project",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Router\\": "src/Router",
+            "Requests\\":"src/Requests",
+            "Models\\":"src/Models"
+        }
+    }
+}
