@@ -12,6 +12,10 @@ class ComposerStaticInit0c9e33b5c0a4ee5c1390d0c6fb1d0049
             'Router\\' => 7,
             'Requests\\' => 9,
         ),
+        'M' => 
+        array (
+            'Models\\' => 7,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -23,11 +27,18 @@ class ComposerStaticInit0c9e33b5c0a4ee5c1390d0c6fb1d0049
         array (
             0 => __DIR__ . '/../..' . '/src/Requests',
         ),
+        'Models\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Models',
+        ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Models\\Database' => __DIR__ . '/../..' . '/src/Models/Database.php',
+        'Models\\Login' => __DIR__ . '/../..' . '/src/Models/Login.php',
         'Requests\\DepositRequest' => __DIR__ . '/../..' . '/src/Requests/DepositRequest.php',
+        'Requests\\LoginRequest' => __DIR__ . '/../..' . '/src/Requests/LoginRequest.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

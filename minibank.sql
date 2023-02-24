@@ -28,9 +28,8 @@ USE minibank;
 
 CREATE TABLE `account` (
   `id` int(11) NOT NULL,
-  `cod` int(6) NOT NULL,
-  `client_id` int(11) NOT NULL,
-  `branch` int(5) NOT NULL
+  `number` int(6) NOT NULL,
+  `client_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -69,7 +68,7 @@ CREATE TABLE `transaction` (
 --
 ALTER TABLE `account`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `cod` (`cod`),
+  ADD UNIQUE KEY `number` (`number`),
   ADD KEY `fk_account_client` (`client_id`);
 
 --

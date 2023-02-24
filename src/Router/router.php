@@ -3,14 +3,18 @@
     namespace Router;
 
 
-
     class Router
     {
         public $routes = array();
 
         public function __construct()
         {
+          //Endpoints para Login
+          $this->addNewRoute("login", "post");
+
+          //Endpoints para Depósito
           $this->addNewRoute("deposit", "get");
+          
       
           $this->getRequestRoute();
         }
@@ -37,8 +41,7 @@
 
           $routeURL = explode("/", $_REQUEST['url']);
           $method = strtolower($_SERVER['REQUEST_METHOD']);
-          $request = "\Requests\\".ucfirst($routeURL[0]).'Request';
-         
+          $request = "\Requests\\".ucfirst($routeURL[0]).'Request';         
 
           foreach ($this->routes as $key => $route) {
             if($routeURL[0] == $route['route'] && $method == $route['method']){
