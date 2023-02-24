@@ -30,7 +30,6 @@
         }
 
         public function generateJWTToken($login){
-            $keyJWT = 'api_minibank';
             //Header do Token JWT
             $header = [
                 'typ' => 'JWT',
@@ -42,8 +41,7 @@
                 'iat' =>  time(),
                 'exp' => time()+(60*30),
                 'uid' => 1,
-                'id' => $login['id'],
-                'login' => $login['login'],
+                'id' => $login['id']
             ];
             //JSON
             $header = json_encode($header);
@@ -52,7 +50,7 @@
             $header = base64_encode($header);
             $payload = base64_encode($payload);
             //Assinatura
-            $sign = hash_hmac('sha256', $header . "." . $payload, $keyJWT, true);
+            $sign = hash_hmac('sha256', $header . "." . $payload, KEY_JWT, true);
             $sign = base64_encode($sign);
             //Token
             $token = $header . '.' . $payload . '.' . $sign;

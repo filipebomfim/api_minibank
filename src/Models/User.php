@@ -29,13 +29,17 @@
             }
         }
 
-        public function getUser($request){
+        public function getUser($userID){
             try {
                 $sql = $this->db->prepare(
-                    "SELECT * FROM users WHERE login =?"
+                    "SELECT * FROM users WHERE id = ?"
                 );
-                $sql->execute(array($request['login']));
-                return $sql->fetch();
+                $sql->execute(array($userID));
+                $data = $sql->fetchAll(\PDO::FETCH_ASSOC);
+                return [
+                    'success'=>true,
+                    'data'=>$data
+                ];
             } catch (\Throwable $th) {
                 return [
                     'success'=>false,

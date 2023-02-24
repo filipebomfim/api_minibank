@@ -2,7 +2,6 @@
 
     namespace Router;
 
-
     class Router
     {
         public $routes = array();
@@ -14,6 +13,7 @@
 
           //Endpoints para Usuário
           $this->addNewRoute("user", "post");
+          $this->addNewRoute("user", "get");
 
           //Endpoints para Depósito
           $this->addNewRoute("deposit", "get");
