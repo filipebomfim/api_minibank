@@ -3,23 +3,23 @@
 
     use Models\Database;
 
-    class Login {
+    class Account {
 
         private $db;
         public function __construct(){
             $this->db = Database::getConnection();
         }
 
-        public function login($credentials){
+        public function create($userId, $accountNumber){
             try {
                 $sql = $this->db->prepare(
-                    "SELECT * FROM users WHERE login = ? AND password = ?"
+            "INSERT INTO account (number, user_id) VALUES (?,?)"
                 );
-                $sql->execute(array($credentials['login'], $credentials['password']));
-                $data = $sql->fetchAll(\PDO::FETCH_ASSOC);
+                $sql->execute(array($userId, $accountNumber));
+                
                 return [
                     'success'=>true,
-                    'data'=>$data
+                    'data'=>'Account '.$accountNumber.' created!'
                 ];
             } catch (\Throwable $th) {
                 return [

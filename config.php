@@ -24,4 +24,24 @@
         exit;
     }
 
+    function _checkRawData_($request,$inputs){
+        $errors = [];
+        foreach($inputs as $input){
+            if(!(isset($request[$input])) || $request[$input]==null) {
+                array_push($errors,$input.' field must be filled'); 
+            }            
+        }
+
+        if ($errors) {
+            return [
+                'success' => false,
+                'data' => $errors
+            ];
+        }else{
+            return [
+                'success' => true,
+            ];
+        }
+    }
+
 ?>

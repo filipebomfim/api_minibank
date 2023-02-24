@@ -14,8 +14,9 @@
 
         public function post(){
             $_POST = json_decode(file_get_contents("php://input"), true);
-            $credentials = $this->login->checkLoginCredentials($_POST);
-            if($credentials['success'] == false){
+            $inputs = ['login','password'];
+            $credentials = _checkRawData_($_POST,$inputs);
+            if(! $credentials['success']){
                 return [
                     'success' => false,
                     'title' => 'Unable to login',
@@ -24,22 +25,22 @@
                 ];
             }
             $login = $this->login->login($_POST); 
-            if(!$login['success']){
+            if(! $login['success']){
                 return [
                     'success' => false,
                     'title' => 'SQL connection failed',
                     'data' => ['errors'=>$login['data']],
-                    'status' => 400,
+                    'status' => 500,
                 ];
             }else{
                 if($login['data']){
                     $login['data'][0]['token'] = $this->login->generateJWTToken($login['data'][0]);
                 }
                 return [
-                    'success' => true,
+                    'success' => $login['data'] ? true : false,
                     'title' => $login['data'] ? 'Login successful' : 'User not found or does not exist',
                     'data' => $login['data'] ? ['authenticated'=>$login['data'][0]] : ['authenticated'=>null],
-                    'status' => $login['data'] ? 200 : 400
+                    'status' => $login['data'] ? 200 : 404
                 ];
             }
         }
