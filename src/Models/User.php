@@ -17,9 +17,10 @@
                     "INSERT INTO users (name, login, password) VALUES (?,?,?)"
                 );
                 $sql->execute(array($request['name'], $request['login'], $request['password']));
+                $newUser = $this->getUser('login',$request['login']);
                 return [
                     'success'=>true,
-                    'data'=>'User '.$request['login'].' created!'
+                    'data'=>$newUser['data']
                 ];
             } catch (\Throwable $th) {
                 return [
@@ -29,12 +30,12 @@
             }
         }
 
-        public function getUser($userID){
+        public function getUser($param, $value){
             try {
                 $sql = $this->db->prepare(
-                    "SELECT * FROM users WHERE id = ?"
+                    "SELECT * FROM users WHERE $param = ?"
                 );
-                $sql->execute(array($userID));
+                $sql->execute(array($value));
                 $data = $sql->fetchAll(\PDO::FETCH_ASSOC);
                 return [
                     'success'=>true,

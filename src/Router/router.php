@@ -34,12 +34,9 @@
         private function getRequestRoute()
         {
           if(!isset($_REQUEST['url'])){
-            _response_(
-              false,
-              'A página acessada não existe',
-              'Sem dados',
-              404
-            );
+            _response_([
+              'error'=>'Accessed page does not exist',  
+            ],404);
           } 
 
           $routeURL = explode("/", $_REQUEST['url']);
@@ -51,8 +48,6 @@
               $response = @call_user_func(array(new $request, $method),$routeURL); 
               if($response){
                 _response_(
-                  $response['success'],
-                  $response['title'],
                   $response['data'],
                   $response['status']
                 );
@@ -60,12 +55,9 @@
             }
           }   
           
-          _response_(
-            false,
-            'A página acessada não existe',
-            'Sem dados',
-            404
-          );
+          _response_([
+            'error'=>'Accessed page does not exist',  
+          ],404);
         }
     }
 ?>
