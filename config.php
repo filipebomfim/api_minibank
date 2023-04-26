@@ -1,4 +1,5 @@
 <?php
+//
     //Set do zona para data e hora do servidor
     date_default_timezone_set('America/Sao_Paulo');
 
